@@ -16,13 +16,14 @@ default: build
 build: protoc-gen
 
 deps:
+	@GO111MODULE=off go get github.com/golang/protobuf/protoc-gen-go
 	@GO111MODULE=off go install github.com/golang/protobuf/protoc-gen-go
 
 # To regen, you will need to:
 # export GOPATH=~/go:~/lab/hexagram30/go
 # export GOBIN=~/go/bin:~/lab/hexagram30/go/bin
 # export PATH=$PATH:$GOBIN
-protoc-gen: api/*.pb.go
+protoc-gen: deps api/*.pb.go
 
 api/%.pb.go: api/%.proto 
 	@protoc -I api --go_out=plugins=grpc:api $<
@@ -44,3 +45,5 @@ redix-run:
 		-engine boltdb \
 		-storage /data \
 		-verbose
+
+.PHONY: default build

@@ -19,7 +19,7 @@ TBD
 
 ## Infrastructure
 
-The Hexgram30 raster project depends upon the on-disk key-value store Redix,
+The Hexgram30 raster project depends upon the on-disk, key-value store Redix,
 which uses the memory-mapped file-based BoltDB as its backend. For development
 and testing, a Docker image is provided:
 
