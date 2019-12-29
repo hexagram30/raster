@@ -1,0 +1,8 @@
+grpc:
+  port: 2525
+  host: localhost
+logging:
+  colored: true
+  level: debug
+  output: stdout
+  report-caller: true
