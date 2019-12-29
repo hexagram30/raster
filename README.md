@@ -1,2 +1,41 @@
 # raster
-A raster store service for use in hexagram30 projects
+
+*A raster store service for use in hexagram30 projects*
+
+## About
+
+TBD
+
+## Service
+
+TBD
+
+## Infrastructure
+
+The Hexgram30 raster project depends upon the on-disk key-value store Redix,
+which uses the memory-mapped file-based BoltDB as its backend. For development
+and testing, a Docker image is provided:
+
+* https://hub.docker.com/r/hexagram30/redixdb
+
+This is a scatch-based Docker image, so it only takes up 16.2 MB uncompressed
+(7.78 MB compressed).
+
+To run the image locally:
+
+```shell
+$ docker run -it \
+		-p 7090:7090 -p 6380:6380 \
+		-v `pwd`/data/redixdb:/data \
+		hexagram30/redixdb:latest \
+		-engine boltdb \
+		-storage /data \
+		-verbose
+```
+
+There is a `make` target provided as a convenience that does the same thing, so
+you can just run this:
+
+```shell
+$ make redix-run
+```
