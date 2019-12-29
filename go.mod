@@ -5,6 +5,7 @@ go 1.12
 require (
 	github.com/geomyidia/go-svc-conventions v0.0.0-20190920200143-18bc521a43b1
 	github.com/geomyidia/reverb v0.0.0-20190919153400-b7e649ce181b
+	github.com/geomyidia/util v0.1.1
 	github.com/geomyidia/zylog v0.1.5
 	github.com/golang/protobuf v1.3.1
 	github.com/labstack/echo/v4 v4.1.10
