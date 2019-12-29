@@ -1,5 +1,12 @@
 # raster
 
+[![Build Status][build-badge]][build]
+![Project Status][project-status]
+[![Go Report Card][report-card-badge]][report-card]
+[![Tagged Version][tag-badge]][tag]
+
+[![Project Logo][logo]][logo-large]
+
 *A raster store service for use in hexagram30 projects*
 
 ## About
@@ -39,3 +46,15 @@ you can just run this:
 ```shell
 $ make redix-run
 ```
+
+<!-- Named page links below: /-->
+
+[logo]: https://raw.githubusercontent.com/hexagram30/raster/master/assets/images/logo.png
+[logo-large]: https://raw.githubusercontent.com/hexagram30/raster/master/assets/images/logo-large.png
+[build-badge]: https://github.com/hexagram30/raster/workflows/Go/badge.svg
+[build]: https://github.com/hexagram30/raster/actions
+[report-card-badge]: https://goreportcard.com/badge/hexagram30/raster
+[report-card]: https://goreportcard.com/report/hexagram30/raster
+[project-status]: https://img.shields.io/badge/project%20status-planning-violet.svg
+[tag-badge]: https://img.shields.io/github/tag/hexagram30/raster.svg
+[tag]: https://github.com/hexagram30/raster/tags
