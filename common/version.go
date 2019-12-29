@@ -1,10 +1,10 @@
 package common
 
-import "github.com/hexagram30/raster/util"
+import "github.com/geomyidia/util/version"
 
 // Versioning data
 var (
-	version    string
+	vsn        string
 	buildDate  string
 	gitCommit  string
 	gitBranch  string
@@ -12,9 +12,9 @@ var (
 )
 
 // VersionData stuff for things
-func VersionData() *util.Version {
-	return &util.Version{
-		Semantic:   version,
+func VersionData() *version.ProjectVersion {
+	return &version.ProjectVersion{
+		Semantic:   vsn,
 		BuildDate:  buildDate,
 		GitCommit:  gitCommit,
 		GitBranch:  gitBranch,
@@ -24,15 +24,15 @@ func VersionData() *util.Version {
 
 // BuildString ...
 func BuildString() string {
-	return util.BuildString(VersionData())
+	return version.BuildString(VersionData())
 }
 
 // VersionString ...
 func VersionString() string {
-	return util.VersionString(VersionData())
+	return version.String(VersionData())
 }
 
 // VersionedBuildString ...
 func VersionedBuildString() string {
-	return util.VersionedBuildString(VersionData())
+	return version.VersionedBuildString(VersionData())
 }
