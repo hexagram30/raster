@@ -24,20 +24,19 @@ jobs:
             dep ensure
         fi
 
-    - name: Lint
+    - name: Run Static Analysis
       run: make lint
 
-    - name: Test
+    - name: Run Tests
       run: make test
 
-    - name: Build
+    - name: Create Binaries
       run: make build
 
-    - name: Slack Notification
-      uses: 8398a7/action-slack@v2
+    - name: Notify CI/CD Slack Channel
+      uses: innocarpe/actions-slack@v1
       with:
         status: ${{ job.status }}
-        author_name: Build Status
       env:
         GITHUB_TOKEN: ${{ secrets.CICD_BOT_TOKEN }}
         SLACK_WEBHOOK_URL: ${{ secrets.CICD_BOT_WEBHOOK }}
