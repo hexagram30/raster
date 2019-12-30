@@ -92,6 +92,8 @@ you can just run this:
 $ make redix-run
 ```
 
+The Docker image is managed by the [hexagram30/docker][docker-repo] repo.
+
 <!-- Named page links below: /-->
 
 [logo]: https://raw.githubusercontent.com/hexagram30/raster/master/assets/images/logo.png
@@ -104,3 +106,4 @@ $ make redix-run
 [tag-badge]: https://img.shields.io/github/tag/hexagram30/raster.svg
 [tag]: https://github.com/hexagram30/raster/tags
 [slack-invite]: https://join.slack.com/t/hexagram30/shared_invite/enQtODc3Mzk0OTczOTIzLTBkOGE3YTJjYTczMWNjMDUzNzU2MGQ0ZTFlMzg3YTNhNmY2YjAyNGM2MmQwNjVhODk5ZDkyOTZjMjFmZmM2Njg
+[docker-repo]: https://github.com/hexagram30/docker

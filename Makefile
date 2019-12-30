@@ -16,15 +16,11 @@ GODOC=godoc -index -links=true -notes="BUG|TODO|XXX|ISSUE"
 
 DVCS_HOST = github.com
 DVCS_ORG = hexagram30
+DOCKER_ORG = $(DVCS_ORG)
 PROJ = raster
 BIN=rasterd
 
 FQ_PROJ = $(DVCS_HOST)/$(DVCS_ORG)/$(PROJ)
-
-DOCKER_ORG = hexagram30
-DOCKER_DIR = build/docker
-REDIX_VERSION = 1.10
-REDIX_DIR = $(DOCKER_DIR)/redixdb
 
 COMMIT_ID = $(shell git rev-parse --short HEAD)
 
@@ -107,15 +103,6 @@ clean-all: clean-protobuf clean
 #############################################################################
 ###   Docker   ##############################################################
 #############################################################################
-
-redix-image:
-	@docker build -t $(DOCKER_ORG)/redixdb $(REDIX_DIR)
-	@docker tag $(DOCKER_ORG)/redixdb $(DOCKER_ORG)/redixdb:latest
-	@docker tag $(DOCKER_ORG)/redixdb $(DOCKER_ORG)/redixdb:$(REDIX_VERSION)
-
-redix-publish:
-	@docker push $(DOCKER_ORG)/redixdb:latest
-	@docker push $(DOCKER_ORG)/redixdb:$(REDIX_VERSION)
 
 redix-run:
 	@docker run -it \
