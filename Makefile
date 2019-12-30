@@ -18,7 +18,6 @@ DVCS_HOST = github.com
 DVCS_ORG = hexagram30
 PROJ = raster
 BIN=rasterd
-CLIENT=rasterc
 
 FQ_PROJ = $(DVCS_HOST)/$(DVCS_ORG)/$(PROJ)
 
@@ -72,7 +71,7 @@ $(GODA):
 
 all: clean lint test build
 
-build: build-server build-client
+build: build-server
 
 deps:
 	@GO111MODULE=off go get github.com/golang/protobuf/protoc-gen-go
@@ -98,12 +97,6 @@ bin/$(BIN): protoc-gen bin
 	@GO111MODULE=on $(GO) build -ldflags "$(LDFLAGS)" -o bin/$(BIN) ./cmd/$(BIN)
 
 build-server: | bin/$(BIN)
-
-bin/$(CLIENT): protoc-gen bin
-	@echo '>> Building client binary'
-	@GO111MODULE=on $(GO) build -ldflags "$(LDFLAGS)" -o bin/$(CLIENT) ./cmd/$(CLIENT)
-
-build-client: | bin/$(CLIENT)
 
 clean:
 	@echo ">> Removing compiled binary files ..."
