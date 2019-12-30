@@ -32,3 +32,23 @@ jobs:
 
     - name: Build
       run: make build
+
+    - name: Build Status Notification (success)
+      uses: voxmedia/github-action-slack-notify-build@v1.1.0
+      if: success()
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.CICD_BOT_TOKEN }}
+      with:
+        channel: cicd
+        status: SUCCESS
+        color: good
+
+    - name: Build Status Notification (failure)
+      uses: voxmedia/github-action-slack-notify-build@v1.1.0
+      if: failure()
+      env:
+        SLACK_BOT_TOKEN: ${{ secrets.CICD_BOT_TOKEN }}
+      with:
+        channel: cicd
+        status: FAILED
+        color: danger
