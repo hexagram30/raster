@@ -1,7 +1,7 @@
 package logging
 
 import (
-	"github.com/geomyidia/go-svc-conventions/components/config"
+	"github.com/hexagram30/raster/components/config"
 	"github.com/geomyidia/zylog/logger"
 	log "github.com/sirupsen/logrus"
 )

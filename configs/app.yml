@@ -1,6 +1,9 @@
 grpc:
-  port: 2525
   host: localhost
+  port: 2525
+redis:
+  host: localhost
+  port: 6380
 logging:
   colored: true
   level: debug

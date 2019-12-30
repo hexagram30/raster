@@ -23,6 +23,7 @@ github.com/fsnotify/fsnotify v1.4.7 h1:IXs+QLmnXW2CcXuY+8Mzv/fWEsPGWxqefPtCP5CnV
 github.com/fsnotify/fsnotify v1.4.7/go.mod h1:jwhsz4b93w/PPRr/qN1Yymfu8t87LnFCMoQvtojpjFo=
 github.com/geomyidia/go-svc-conventions v0.0.0-20190920200143-18bc521a43b1 h1:ofmeUoHNNg/+fTQS2MYVjvZqTCo8V7ucKnX9DkvRPkU=
 github.com/geomyidia/go-svc-conventions v0.0.0-20190920200143-18bc521a43b1/go.mod h1:uEAgw+U/0uxdWPUE66P3SYyttLm9IoSI63kd4OuG6Sk=
+github.com/geomyidia/reverb v0.0.0-20190919153400-b7e649ce181b h1:RKJfd+Aa9hgnunV6gyvp/OfwCCZR9y3BYmJn+li7C+g=
 github.com/geomyidia/reverb v0.0.0-20190919153400-b7e649ce181b/go.mod h1:BkKginsGUbliEDhCUxMOb/MkGuVFAPVfrBQgj/YZCzQ=
 github.com/geomyidia/util v0.1.1 h1:6evRYBFfLULcb08248sA0cMbcYeaDfgA5S+ub+aaHWg=
 github.com/geomyidia/util v0.1.1/go.mod h1:0uU9t6oz8EsT138Oxsm9Ti7FTDtiRKx3ri3g3FcM8jg=
