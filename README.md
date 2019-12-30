@@ -33,6 +33,30 @@ Run it:
 $ ./bin/rasterd
 ```
 
+## Client
+
+Run it:
+
+```shell
+$ ./bin/rasterc ping
+```
+```
+PONG
+```
+
+```shell
+$ ./bin/rasterc version | jq .
+```
+```
+{
+  "version": "0.1.0-dev",
+  "buildDate": "2019-12-30T06:52:51Z",
+  "gitCommit": "1fae8c0",
+  "gitBranch": "master",
+  "gitSummary": "v0.0.0-3-g1fae8c0-dirty"
+}
+```
+
 ## Infrastructure
 
 The Hexgram30 raster project depends upon the on-disk, key-value store Redix,

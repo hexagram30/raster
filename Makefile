@@ -29,7 +29,7 @@ REDIX_DIR = $(DOCKER_DIR)/redixdb
 
 COMMIT_ID = $(shell git rev-parse --short HEAD)
 
-LD_VERSION = -X $(FQ_PROJ)/common.version=$(VERSION)
+LD_VERSION = -X $(FQ_PROJ)/common.vsn=$(VERSION)
 LD_BUILDDATE = -X $(FQ_PROJ)/common.buildDate=$(shell date -u +"%Y-%m-%dT%H:%M:%SZ")
 LD_GITCOMMIT = -X $(FQ_PROJ)/common.gitCommit=$(COMMIT_ID)
 LD_GITBRANCH = -X $(FQ_PROJ)/common.gitBranch=$(shell git rev-parse --abbrev-ref HEAD)
