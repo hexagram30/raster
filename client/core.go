@@ -47,7 +47,7 @@ func (c *Client) SetupConnection() {
 	c.RPCClient = pb.NewServiceAPIClient(conn)
 }
 
-// ParseOpts
+// ParseOpts ...
 func (c *Client) ParseOpts() {
 
 }
