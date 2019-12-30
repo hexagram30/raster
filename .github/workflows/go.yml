@@ -37,6 +37,9 @@ jobs:
       uses: innocarpe/actions-slack@v1
       with:
         status: ${{ job.status }}
+        success_text: 'Build Succeeded ✅🚢🐿'
+        failure_text: 'Build Failed ❌🚒🤬'
+        cancelled_text: 'Build Cancelled 🚧😯🦡'
       env:
         GITHUB_TOKEN: ${{ secrets.CICD_BOT_TOKEN }}
         SLACK_WEBHOOK_URL: ${{ secrets.CICD_BOT_WEBHOOK }}
