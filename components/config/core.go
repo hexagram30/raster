@@ -95,28 +95,28 @@ func New() *Config {
 	return &Config{
 		Client: &ClientConfig{
 			Logging: &logger.ZyLogOptions{
-				Colored:      viper.GetBool("client.logging.colored"),
-				Level:        viper.GetString("client.logging.level"),
-				Output:       viper.GetString("client.logging.output"),
-				ReportCaller: viper.GetBool("client.logging.report-caller"),
+				Colored:      viper.GetBool("raster.client.logging.colored"),
+				Level:        viper.GetString("raster.client.logging.level"),
+				Output:       viper.GetString("raster.client.logging.output"),
+				ReportCaller: viper.GetBool("raster.client.logging.report-caller"),
 			},
 		},
 		DB: &DBConfig{
-			Type: viper.GetString("db.type"),
+			Type: viper.GetString("raster.db.type"),
 			Redix: &RedixConfig{
-				Host: viper.GetString("db.redix.host"),
-				Port: viper.GetInt("db.redix.port"),
+				Host: viper.GetString("raster.db.redix.host"),
+				Port: viper.GetInt("raster.db.redix.port"),
 			},
 		},
 		GRPCD: &GRPCDConfig{
-			Host: viper.GetString("grpc.host"),
-			Port: viper.GetInt("grpc.port"),
+			Host: viper.GetString("raster.grpc.host"),
+			Port: viper.GetInt("raster.grpc.port"),
 		},
 		Logging: &logger.ZyLogOptions{
-			Colored:      viper.GetBool("logging.colored"),
-			Level:        viper.GetString("logging.level"),
-			Output:       viper.GetString("logging.output"),
-			ReportCaller: viper.GetBool("logging.report-caller"),
+			Colored:      viper.GetBool("raster.logging.colored"),
+			Level:        viper.GetString("raster.logging.level"),
+			Output:       viper.GetString("raster.logging.output"),
+			ReportCaller: viper.GetBool("raster.logging.report-caller"),
 		},
 	}
 }

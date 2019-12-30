@@ -14,7 +14,7 @@ import (
 
 func main() {
 	// Create the application object and assign components to it
-	c := client.NewClient()
+	c := client.New()
 	c.Config = config.New()
 	c.Logger = logging.LoadClient(c.Config)
 	c.SetupConnection()

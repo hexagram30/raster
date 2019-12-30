@@ -23,7 +23,7 @@ type Client struct {
 }
 
 // NewClient ...
-func NewClient() *Client {
+func New() *Client {
 	client := Client{}
 	client.AppName = config.AppName
 	client.AppAbbv = config.AppName
@@ -45,9 +45,4 @@ func (c *Client) SetupConnection() {
 	}
 	c.RPCConn = conn
 	c.RPCClient = pb.NewServiceAPIClient(conn)
-}
-
-// ParseOpts ...
-func (c *Client) ParseOpts() {
-
 }

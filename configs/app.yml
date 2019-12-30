@@ -1,22 +1,23 @@
-client:
+raster:
+  client:
+    logging:
+      colored: true
+      level: error
+      output: stdout
+      report-caller: true
+  db:
+    type: redix
+    redix:
+      host: localhost
+      port: 6380
+    redis:
+      host: localhost
+      port: 7000
+  grpc:
+    host: localhost
+    port: 2525
   logging:
     colored: true
-    level: error
+    level: debug
     output: stdout
     report-caller: true
-db:
-  type: redix
-  redix:
-    host: localhost
-    port: 6380
-  redis:
-    host: localhost
-    port: 7000
-grpc:
-  host: localhost
-  port: 2525
-logging:
-  colored: true
-  level: debug
-  output: stdout
-  report-caller: true
