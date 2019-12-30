@@ -37,9 +37,9 @@ jobs:
       uses: innocarpe/actions-slack@v1
       with:
         status: ${{ job.status }}
-        success_text: '${{ github.repository }} build succeeded ✅🚢🐿 (commit id: ${{ github.sha }})'
-        failure_text: '${{ github.repository }} build failed ❌🚒🤬 (commit id: ${{ github.sha }})'
-        cancelled_text: '${{ github.repository }} build cancelled 🚧😯🦡 (commit id: ${{ github.sha }})'
+        success_text: 'Build for ${{ github.repository }} succeeded ✅🚢🐿 (commit id: ${{ github.sha }})'
+        failure_text: 'Build for ${{ github.repository }} failed ❌🚒🤬 (commit id: ${{ github.sha }})'
+        cancelled_text: 'Build for ${{ github.repository }} was cancelled 🚧😯🦡 (commit id: ${{ github.sha }})'
       env:
         GITHUB_TOKEN: ${{ secrets.CICD_BOT_TOKEN }}
         SLACK_WEBHOOK_URL: ${{ secrets.CICD_BOT_WEBHOOK }}
