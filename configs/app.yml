@@ -1,6 +1,9 @@
-grpc:
-  host: localhost
-  port: 2525
+client:
+  logging:
+    colored: true
+    level: error
+    output: stdout
+    report-caller: true
 db:
   type: redix
   redix:
@@ -9,6 +12,9 @@ db:
   redis:
     host: localhost
     port: 7000
+grpc:
+  host: localhost
+  port: 2525
 logging:
   colored: true
   level: debug

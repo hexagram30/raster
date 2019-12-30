@@ -11,7 +11,7 @@ import (
 
 // Configuration related constants
 const (
-	AppName         string = "app"
+	AppName         string = "raster"
 	ConfigDir       string = "configs"
 	ConfigFile      string = "app"
 	ConfigType      string = "yaml"
@@ -34,6 +34,11 @@ func init() {
 		// log.Panic is not used here, since logging depends ...
 		log.Panicf("%s: %s", ConfigReadError, err)
 	}
+}
+
+// ClientConfig ...
+type ClientConfig struct {
+	Logging *logger.ZyLogOptions
 }
 
 // RedisConfig ...
@@ -67,6 +72,7 @@ type GRPCDConfig struct {
 
 // Config ...
 type Config struct {
+	Client  *ClientConfig
 	DB      *DBConfig
 	GRPCD   *GRPCDConfig
 	Logging *logger.ZyLogOptions
@@ -87,6 +93,14 @@ type Config struct {
 // in ./components/logging.go, Setup).
 func New() *Config {
 	return &Config{
+		Client: &ClientConfig{
+			Logging: &logger.ZyLogOptions{
+				Colored:      viper.GetBool("client.logging.colored"),
+				Level:        viper.GetString("client.logging.level"),
+				Output:       viper.GetString("client.logging.output"),
+				ReportCaller: viper.GetBool("client.logging.report-caller"),
+			},
+		},
 		DB: &DBConfig{
 			Type: viper.GetString("db.type"),
 			Redix: &RedixConfig{

@@ -13,6 +13,12 @@
 
 TBD
 
+## Dependencies
+
+* Non-Go deps: protobuf (e.g., `brew install protobuf`)
+* Go-based deps: `make deps`
+* Redix: `make redix-run` (see the "Infrastructure" section below)
+
 ## Service
 
 Build it:
