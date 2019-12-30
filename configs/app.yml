@@ -1,9 +1,14 @@
 grpc:
   host: localhost
   port: 2525
-redis:
-  host: localhost
-  port: 6380
+db:
+  type: redix
+  redix:
+    host: localhost
+    port: 6380
+  redis:
+    host: localhost
+    port: 7000
 logging:
   colored: true
   level: debug

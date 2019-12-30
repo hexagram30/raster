@@ -1,8 +1,9 @@
 package components
 
 import (
-	"github.com/hexagram30/raster/components/config"
 	"github.com/geomyidia/reverb"
+	"github.com/hexagram30/raster/components/config"
+	"github.com/hexagram30/raster/components/db"
 	logger "github.com/sirupsen/logrus"
 )
 
@@ -21,6 +22,7 @@ type TestBase struct {
 type Default struct {
 	Base
 	GRPCD *reverb.Reverb
+	DB    db.DB
 }
 
 // Add more components here that have more or less than what's done above. This

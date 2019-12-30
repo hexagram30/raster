@@ -15,7 +15,17 @@ TBD
 
 ## Service
 
-TBD
+Build it:
+
+```shell
+$ make
+```
+
+Run it:
+
+```shell
+$ ./bin/rasterd
+```
 
 ## Infrastructure
 
@@ -53,7 +63,7 @@ $ make redix-run
 [logo-large]: https://raw.githubusercontent.com/hexagram30/raster/master/assets/images/logo-large.png
 [build-badge]: https://github.com/hexagram30/raster/workflows/Go/badge.svg
 [build]: https://github.com/hexagram30/raster/actions
-[report-card-badge]: https://goreportcard.com/badge/hexagram30/raster
+[report-card-badge]: https://goreportcard.com/badge/hexagram30/raster?v1
 [report-card]: https://goreportcard.com/report/hexagram30/raster
 [project-status]: https://img.shields.io/badge/project%20status-planning-violet.svg
 [tag-badge]: https://img.shields.io/github/tag/hexagram30/raster.svg

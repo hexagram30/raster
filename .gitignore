@@ -17,3 +17,6 @@
 
 # Raw images
 *.xcf
+
+# Data
+/data

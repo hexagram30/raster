@@ -6,7 +6,7 @@ import (
 
 	logger "github.com/geomyidia/zylog/logger"
 	log "github.com/sirupsen/logrus"
-	cfg "github.com/spf13/viper"
+	"github.com/spf13/viper"
 )
 
 // Configuration related constants
@@ -19,17 +19,17 @@ const (
 )
 
 func init() {
-	cfg.AddConfigPath(ConfigDir)
-	cfg.SetConfigName(ConfigFile)
-	cfg.SetConfigType(ConfigType)
-	cfg.SetEnvPrefix(AppName)
+	viper.AddConfigPath(ConfigDir)
+	viper.SetConfigName(ConfigFile)
+	viper.SetConfigType(ConfigType)
+	viper.SetEnvPrefix(AppName)
 
-	cfg.SetEnvKeyReplacer(strings.NewReplacer(".", "_", "-", "_"))
-	cfg.Set("Verbose", true)
-	cfg.AutomaticEnv()
-	cfg.AddConfigPath("/")
+	viper.SetEnvKeyReplacer(strings.NewReplacer(".", "_", "-", "_"))
+	viper.Set("Verbose", true)
+	viper.AutomaticEnv()
+	viper.AddConfigPath("/")
 
-	err := cfg.ReadInConfig()
+	err := viper.ReadInConfig()
 	if err != nil {
 		// log.Panic is not used here, since logging depends ...
 		log.Panicf("%s: %s", ConfigReadError, err)
@@ -38,8 +38,25 @@ func init() {
 
 // RedisConfig ...
 type RedisConfig struct {
+	Name     string
+	Host     string
+	Port     int
+	Password string
+	DBIndex  int
+}
+
+// RedixConfig ...
+type RedixConfig struct {
+	Name string
 	Host string
 	Port int
+}
+
+// DBConfig ...
+type DBConfig struct {
+	Type  string
+	Redis *RedisConfig
+	Redix *RedixConfig
 }
 
 // GRPCDConfig ...
@@ -50,12 +67,12 @@ type GRPCDConfig struct {
 
 // Config ...
 type Config struct {
-	DB      RedisConfig
-	GRPCD   GRPCDConfig
+	DB      *DBConfig
+	GRPCD   *GRPCDConfig
 	Logging *logger.ZyLogOptions
 }
 
-// NewConfig is a constructor that creates the full coniguration data structure
+// New is a constructor that creates the full coniguration data structure
 // for use by our application(s) and client(s) as an in-memory copy of the
 // config data (saving from having to make repeated and somewhat expensive
 // calls to the viper library).
@@ -68,21 +85,24 @@ type Config struct {
 // Furthermore, in our case, we're utilizing structs from other libraries to
 // be used when setting those up (see how we initialize the logging component
 // in ./components/logging.go, Setup).
-func NewConfig() *Config {
+func New() *Config {
 	return &Config{
-		DB: RedisConfig{
-			Host: cfg.GetString("redis.host"),
-			Port: cfg.GetInt("redis.port"),
+		DB: &DBConfig{
+			Type: viper.GetString("db.type"),
+			Redix: &RedixConfig{
+				Host: viper.GetString("db.redix.host"),
+				Port: viper.GetInt("db.redix.port"),
+			},
 		},
-		GRPCD: GRPCDConfig{
-			Host: cfg.GetString("grpc.host"),
-			Port: cfg.GetInt("grpc.port"),
+		GRPCD: &GRPCDConfig{
+			Host: viper.GetString("grpc.host"),
+			Port: viper.GetInt("grpc.port"),
 		},
 		Logging: &logger.ZyLogOptions{
-			Colored:      cfg.GetBool("logging.colored"),
-			Level:        cfg.GetString("logging.level"),
-			Output:       cfg.GetString("logging.output"),
-			ReportCaller: cfg.GetBool("logging.report-caller"),
+			Colored:      viper.GetBool("logging.colored"),
+			Level:        viper.GetString("logging.level"),
+			Output:       viper.GetString("logging.output"),
+			ReportCaller: viper.GetBool("logging.report-caller"),
 		},
 	}
 }
@@ -94,5 +114,10 @@ func (c *Config) GRPCConnectionString() string {
 
 // RedisConnectionString ...
 func (c *Config) RedisConnectionString() string {
-	return fmt.Sprintf("%s:%d", c.DB.Host, c.DB.Port)
+	return fmt.Sprintf("%s:%d", c.DB.Redis.Host, c.DB.Redis.Port)
+}
+
+// RedixConnectionString ...
+func (c *Config) RedixConnectionString() string {
+	return fmt.Sprintf("%s:%d", c.DB.Redix.Host, c.DB.Redix.Port)
 }

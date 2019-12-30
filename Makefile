@@ -37,7 +37,7 @@ LD_GITSUMMARY = -X $(FQ_PROJ)/common.gitSummary=$(shell git describe --tags --di
 
 LDFLAGS = -w -s $(LD_VERSION) $(LD_BUILDDATE) $(LD_GITBRANCH) $(LD_GITSUMMARY) $(LD_GITCOMMIT)
 
-default: build
+default: all
 
 #############################################################################
 ###   Custom Installs   #####################################################
@@ -70,13 +70,15 @@ $(GODA):
 ###   Build   ###############################################################
 #############################################################################
 
+all: build
+
 build: build-server build-client
 
 deps:
 	@GO111MODULE=off go get github.com/golang/protobuf/protoc-gen-go
 	@GO111MODULE=off go install github.com/golang/protobuf/protoc-gen-go
 
-# To regen, you will need to:
+# To generate protobuf files, you will need to:
 # export GOPATH=~/go:~/lab/hexagram30/go
 # export GOBIN=~/go/bin:~/lab/hexagram30/go/bin
 # export PATH=$PATH:$GOBIN
@@ -103,8 +105,9 @@ bin/$(CLIENT): protoc-gen bin
 
 build-client: | bin/$(CLIENT)
 
-clean: 
-	@rm bin/*
+clean:
+	@echo ">> Removing compiled binary files ..."
+	@rm -f bin/*
 
 clean-all: clean-protobuf clean
 
@@ -205,6 +208,9 @@ check-modules:
 	@echo '>> Checking modules ...'
 	@GO111MODULE=on $(GO) mod tidy
 	@GO111MODULE=on $(GO) mod verify
+
+update-modules:
+	@GO111MODULE=on go get -u ./...
 
 list:
 	@$(MAKE) -pRrq -f $(lastword $(MAKEFILE_LIST)) : 2>/dev/null | \
