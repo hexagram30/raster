@@ -11,7 +11,12 @@
 
 ## About
 
-TBD
+(info coming soon)
+
+## Social
+
+Here's an [invite to the Slack workspace][slack-invite] for this and other
+Hexagram30 projects.
 
 ## Dependencies
 
@@ -98,3 +103,4 @@ $ make redix-run
 [project-status]: https://img.shields.io/badge/project%20status-planning-violet.svg
 [tag-badge]: https://img.shields.io/github/tag/hexagram30/raster.svg
 [tag]: https://github.com/hexagram30/raster/tags
+[slack-invite]: https://join.slack.com/t/hexagram30/shared_invite/enQtODc3Mzk0OTczOTIzLTBkOGE3YTJjYTczMWNjMDUzNzU2MGQ0ZTFlMzg3YTNhNmY2YjAyNGM2MmQwNjVhODk5ZDkyOTZjMjFmZmM2Njg
