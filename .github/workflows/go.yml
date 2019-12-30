@@ -33,7 +33,7 @@ jobs:
     - name: Build
       run: make build
 
-    - name: Build Status Notification
+    - name: Slack Notification
       uses: 8398a7/action-slack@v2
       with:
         status: ${{ job.status }}
