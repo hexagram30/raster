@@ -70,7 +70,7 @@ $(GODA):
 ###   Build   ###############################################################
 #############################################################################
 
-all: build
+all: clean lint test build
 
 build: build-server build-client
 
@@ -84,7 +84,7 @@ deps:
 # export PATH=$PATH:$GOBIN
 protoc-gen: deps api/*.pb.go
 
-api/%.pb.go: api/%.proto 
+api/%.pb.go: api/%.proto
 	@protoc -I api --go_out=plugins=grpc:api $<
 
 clean-protobuf:
