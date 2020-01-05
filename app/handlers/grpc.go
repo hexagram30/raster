@@ -6,14 +6,14 @@ import (
 	"google.golang.org/grpc"
 
 	"github.com/golang/protobuf/proto"
-	pb "github.com/hexagram30/raster/api"
+	"github.com/hexagram30/raster/api"
 	"github.com/hexagram30/raster/common"
 	log "github.com/sirupsen/logrus"
 )
 
 // GRPCHandlerServer ...
 type GRPCHandlerServer struct {
-	pb.UnimplementedServiceAPIServer
+	api.UnimplementedServiceAPIServer
 }
 
 // NewGRPCHandlerServer ...
@@ -23,33 +23,33 @@ func NewGRPCHandlerServer() *GRPCHandlerServer {
 
 // RegisterServer ...
 func (s *GRPCHandlerServer) RegisterServer(grpcServer *grpc.Server) {
-	pb.RegisterServiceAPIServer(grpcServer, s)
+	api.RegisterServiceAPIServer(grpcServer, s)
 }
 
 // Echo ...
-func (s *GRPCHandlerServer) Echo(ctx context.Context, in *pb.GenericData) (*pb.GenericData, error) {
+func (s *GRPCHandlerServer) Echo(ctx context.Context, in *api.GenericData) (*api.GenericData, error) {
 	log.Debugf("Received: %v", in)
-	return &pb.GenericData{Data: in.GetData()}, nil
+	return &api.GenericData{Data: in.GetData()}, nil
 }
 
 // Health ...
-func (s *GRPCHandlerServer) Health(ctx context.Context, in *pb.HealthRequest) (*pb.HealthReply, error) {
+func (s *GRPCHandlerServer) Health(ctx context.Context, in *api.HealthRequest) (*api.HealthReply, error) {
 	log.Debugf("Received: %v", in)
-	return &pb.HealthReply{Components: "OK", Errors: "NULL"}, nil
+	return &api.HealthReply{Components: "OK", Errors: "NULL"}, nil
 }
 
 // Ping ...
-func (s *GRPCHandlerServer) Ping(ctx context.Context, in *pb.PingRequest) (*pb.PingReply, error) {
+func (s *GRPCHandlerServer) Ping(ctx context.Context, in *api.PingRequest) (*api.PingReply, error) {
 	log.Debugf("Received: %v", in)
-	return &pb.PingReply{Data: "PONG"}, nil
+	return &api.PingReply{Data: "PONG"}, nil
 }
 
 // Version ...
 func (s *GRPCHandlerServer) Version(
-	ctx context.Context, in *pb.VersionRequest) (*pb.VersionReply, error) {
+	ctx context.Context, in *api.VersionRequest) (*api.VersionReply, error) {
 	log.Tracef("Received: %v", in)
 	version := common.VersionData()
-	return &pb.VersionReply{
+	return &api.VersionReply{
 		Version:    *proto.String(version.Semantic),
 		BuildDate:  *proto.String(version.BuildDate),
 		GitCommit:  *proto.String(version.GitCommit),

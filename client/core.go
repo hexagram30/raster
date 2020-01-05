@@ -22,7 +22,7 @@ type Client struct {
 	components.BaseRPCClient
 }
 
-// NewClient ...
+// New ...
 func New() *Client {
 	client := Client{}
 	client.AppName = config.AppName
