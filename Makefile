@@ -34,6 +34,8 @@ LDFLAGS = -w -s $(LD_VERSION) $(LD_BUILDDATE) $(LD_GITBRANCH) $(LD_GITSUMMARY) $
 
 default: all
 
+all: clean protoc-gen lint test build
+
 #############################################################################
 ###   Custom Installs   #####################################################
 #############################################################################
@@ -62,28 +64,56 @@ $(GODA):
 	$(GO) get -u github.com/loov/goda
 
 #############################################################################
-###   Build   ###############################################################
+###   Protobuf Support   ####################################################
 #############################################################################
 
-all: clean lint test build
+# To generate protobuf files, you will need to:
+# export GOPATH=~/go:~/lab/hexagram30/go
+# export GOBIN=~/go/bin:~/lab/hexagram30/go/bin
+# export PATH=$PATH:$GOBIN
+
+PROTOBUF_SRC = api
+PROTOBUF_GO = $(PROTOBUF_SRC)
+THIRD_PARTY = ./vendor
+PROTO_HXGM30_BASE = github.com/hexagram30
+PROTO_HXGM30_PROTO = $(PROTO_HXGM30_BASE)/protocols
+PROTO_HXGM30_PROTO_REPO = https://$(PROTO_HXGM30_PROTO).git
+
+$(THIRD_PARTY):
+	@mkdir -p $(THIRD_PARTY)/$(PROTO_HXGM30_BASE)
+
+$(THIRD_PARTY)/$(PROTO_HXGM30_PROTO):
+	@-cd $(THIRD_PARTY)/$(PROTO_HXGM30_BASE) && git clone $(PROTO_HXGM30_PROTO_REPO)
+
+proto-deps: $(THIRD_PARTY) $(THIRD_PARTY)/$(PROTO_HXGM30_PROTO)
+
+protoc-gen: clean-protobuf proto-deps protoc-gen-go
+
+protoc-gen-go: deps $(PROTOBUF_GO)/*.pb.go fix-pb-go-import
+
+$(PROTOBUF_GO)/%.pb.go: $(PROTOBUF_SRC)/%.proto
+	@protoc -I $(PROTOBUF_SRC) -I $(THIRD_PARTY) --go_out=plugins=grpc:$(PROTOBUF_GO) $<
+
+PROTO_DEP_IMPORT = $(PROTO_HXGM30_PROTO)/src/proto
+GOLANG_DEP_IMPORT = $(PROTO_HXGM30_PROTO)/src/golang/common
+
+fix-pb-go-import:
+	@sed -i.bak 's|$(PROTO_DEP_IMPORT)|$(GOLANG_DEP_IMPORT)|g' $(PROTOBUF_GO)/*.go && \
+	sed -i.bak 's|json:"diceType|json:"dice-type|g' $(PROTOBUF_GO)/*.go && \
+	rm $(PROTOBUF_GO)/*.go.bak
+
+clean-protobuf:
+	@rm -f $(PROTOBUF_GO)/*.pb.go
+
+#############################################################################
+###   Build   ###############################################################
+#############################################################################
 
 build: build-server
 
 deps:
 	@GO111MODULE=off go get github.com/golang/protobuf/protoc-gen-go
 	@GO111MODULE=off go install github.com/golang/protobuf/protoc-gen-go
-
-# To generate protobuf files, you will need to:
-# export GOPATH=~/go:~/lab/hexagram30/go
-# export GOBIN=~/go/bin:~/lab/hexagram30/go/bin
-# export PATH=$PATH:$GOBIN
-protoc-gen: deps api/*.pb.go
-
-api/%.pb.go: api/%.proto
-	@protoc -I api --go_out=plugins=grpc:api $<
-
-clean-protobuf:
-	@rm -f api/*.pb.go
 
 bin:
 	@mkdir ./bin

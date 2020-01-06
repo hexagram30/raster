@@ -1,59 +1,18 @@
 syntax = "proto3";
 
 option java_multiple_files = true;
-option java_package = "hxgm30.raster.api";
+option java_package = "hxgm30.raster.pb.api";
 option java_outer_classname = "RasterAPIProto";
+
+import "github.com/hexagram30/protocols/src/proto/common.proto";
 
 package api;
 
 // Interface exported by the server.
 service ServiceAPI {
   // Respond with what we got
-  rpc Echo(GenericData) returns (GenericData) {}
-  // Return server health status
-  rpc Health(HealthRequest) returns (HealthReply) {}
   // Return "pong" for "ping"
-  rpc Ping(PingRequest) returns (PingReply) {}
+  rpc Ping(common.PingRequest) returns (common.PingReply) {}
   // Get version data
-  rpc Version(VersionRequest) returns (VersionReply) {}
-}
-
-// GenericData ...
-message GenericData {
-  string data = 1;
-}
-
-// HealthRequest ...
-message HealthRequest {
-  string data = 1;
-}
-
-// HealthReply ...
-message HealthReply {
-  string components = 1;
-  string errors = 2;
-}
-
-// PingRequest ...
-message PingRequest {
-  string data = 1;
-}
-
-// PingReply ...
-message PingReply {
-  string data = 1;
-}
-
-// VersionRequest ...
-message VersionRequest {
-    string data = 1;
-}
-
-// VersionReply ...
-message VersionReply {
-    string version = 1;
-    string buildDate = 2;
-    string gitCommit = 3;
-    string gitBranch = 4;
-    string gitSummary = 5;
+  rpc Version(common.VersionRequest) returns (common.VersionReply) {}
 }
