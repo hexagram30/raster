@@ -87,9 +87,9 @@ $(THIRD_PARTY)/$(PROTO_HXGM30_PROTO):
 
 proto-deps: $(THIRD_PARTY) $(THIRD_PARTY)/$(PROTO_HXGM30_PROTO)
 
-protoc-gen: clean-protobuf proto-deps protoc-gen-go
+protoc-gen: proto-deps protoc-gen-go
 
-protoc-gen-go: deps $(PROTOBUF_GO)/*.pb.go fix-pb-go-import
+protoc-gen-go: clean-protobuf-go deps $(PROTOBUF_GO)/*.pb.go fix-pb-go-import
 
 $(PROTOBUF_GO)/%.pb.go: $(PROTOBUF_SRC)/%.proto
 	@protoc -I $(PROTOBUF_SRC) -I $(THIRD_PARTY) --go_out=plugins=grpc:$(PROTOBUF_GO) $<
@@ -102,7 +102,7 @@ fix-pb-go-import:
 	sed -i.bak 's|json:"diceType|json:"dice-type|g' $(PROTOBUF_GO)/*.go && \
 	rm $(PROTOBUF_GO)/*.go.bak
 
-clean-protobuf:
+clean-protobuf-go:
 	@rm -f $(PROTOBUF_GO)/*.pb.go
 
 #############################################################################
@@ -118,7 +118,7 @@ deps:
 bin:
 	@mkdir ./bin
 
-bin/$(BIN): protoc-gen bin
+bin/$(BIN): bin
 	@echo '>> Building server binary'
 	@GO111MODULE=on $(GO) build -ldflags "$(LDFLAGS)" -o bin/$(BIN) ./cmd/$(BIN)
 
@@ -128,7 +128,7 @@ clean:
 	@echo ">> Removing compiled binary files ..."
 	@rm -f bin/*
 
-clean-all: clean-protobuf clean
+clean-all: clean-protobuf-go clean
 
 #############################################################################
 ###   Docker   ##############################################################
