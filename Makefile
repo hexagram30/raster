@@ -150,7 +150,7 @@ redix-run:
 show-linter:
 	@echo $(GOLANGCI_LINT)
 
-lint-silent: protoc-gen $(GOLANGCI_LINT)
+lint-silent: $(GOLANGCI_LINT)
 	@$(GOLANGCI_LINT) \
 	--enable=typecheck \
 	--enable=golint \
@@ -167,11 +167,11 @@ lint:
 	@echo '>> Linting source code'
 	@GO111MODULE=on $(MAKE) lint-silent
 
-test: protoc-gen $(RICH_GO)
+test: $(RICH_GO)
 	@echo '>> Running all tests'
 	@GO111MODULE=on $(RICH_GO) test ./... -v
 
-test-nocolor: protoc-gen
+test-nocolor:
 	@echo '>> Running all tests'
 	@GO111MODULE=on $(GO) test ./... -v
 
