@@ -3,7 +3,7 @@ package client
 import (
 	"context"
 
-	"github.com/hexagram30/raster/api"
+	"github.com/hexagram30/protocols/src/golang/common"
 	log "github.com/sirupsen/logrus"
 )
 
@@ -17,7 +17,7 @@ func (c *Client) Ping() string {
 	ctx, cancel := context.WithTimeout(context.Background(), shortTimeout)
 	defer cancel()
 
-	r, err := c.RPCClient.Ping(ctx, &api.PingRequest{})
+	r, err := c.RPCClient.Ping(ctx, &common.PingRequest{})
 	if err != nil {
 		log.Fatalf("Could not get ping reply: %v", err)
 	}
@@ -26,12 +26,12 @@ func (c *Client) Ping() string {
 }
 
 // Version ...
-func (c *Client) Version() *api.VersionReply {
+func (c *Client) Version() *common.VersionReply {
 
 	ctx, cancel := context.WithTimeout(context.Background(), shortTimeout)
 	defer cancel()
 
-	r, err := c.RPCClient.Version(ctx, &api.VersionRequest{})
+	r, err := c.RPCClient.Version(ctx, &common.VersionRequest{})
 	if err != nil {
 		log.Fatalf("Could not get version: %v", err)
 	}
